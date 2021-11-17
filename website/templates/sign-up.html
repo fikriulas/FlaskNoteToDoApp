@@ -7,21 +7,41 @@
 <div class='signUp'>
     <form action="/sign-up" method="post">
         <div class='input-control'>
-            <input type='name' id='name' name='name' placeholder="Name" />
+            {{form.name(placeholder="Name")}}
+            {% for error in form.name.errors %}
+            <span style="color:red;">
+                <small>{{error}} <br></small>
+            </span>
+            {% endfor %}
         </div>
         <div class='input-control'>
             <label for='email'></label>
-            <input type='email' id='email' name='email' placeholder="Enter E-Mail" />
+            {{form.email(placeholder="E-Mail")}}
+            {% for error in form.email.errors %}
+            <span style="color:red;">
+                <small>{{error}} <br></small>
+            </span>
+            {% endfor %}
         </div>
         <div class='input-control'>
             <label for='emailConfirm'></label>
-            <input type='emailConfirm' id='emailConfirm' name='emailConfirm' placeholder="E-Mail Confirm" />
+            {{form.emailConfirm(placeholder="E-Mail Confirm")}}
+            {% for error in form.emailConfirm.errors %}
+            <span style="color:red;">
+                <small>{{error}} <br></small>
+            </span>
+            {% endfor %}
         </div>
         <div class='input-control'>
             <label for='password'></label>
-            <input type='password' id='password' name='password' placeholder="Enter Password" />
+            {{form.password(placeholder="Password")}}
+            {% for error in form.password.errors %}
+            <span style="color:red;">
+                <small>{{error}} <br></small>
+            </span>
+            {% endfor %}
         </div>
-        <button type="submit">LOGIN</button>
+        <button type="submit" style="margin-top:5px;">LOGIN</button>
     </form>
 </div>
 

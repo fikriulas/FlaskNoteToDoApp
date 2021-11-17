@@ -1,6 +1,18 @@
 from flask import Blueprint, render_template, request, flash
+from flask_wtf import FlaskForm
+from wtforms import StringField, validators
+from wtforms.widgets import PasswordInput
+from wtforms.validators import DataRequired, Length, ValidationError, Email, email_validator, EqualTo 
+#email_validator için "pip install email_validator"
 
 auth = Blueprint('auth', __name__)
+
+class RegisterForm(FlaskForm):
+    name = StringField('name', validators=[DataRequired('This Field Is Required'),Length(min=3,max=30)])
+    email = StringField('email', validators=[DataRequired('This Field Is Required'),Email('This field requires a valid email address'),Length(min=3,max=40)])
+    emailConfirm = StringField('emailConfirm', validators=[DataRequired('This Field Is Required'),EqualTo('email',message="E-Mail Field does not match.")])
+    password = StringField('password', validators=[DataRequired('This Field Is Required'),Length(min=7,max=15)],widget=PasswordInput(hide_value=False))
+
 
 @auth.route('/login',methods=['GET','POST'])
 def login():
@@ -13,16 +25,18 @@ def logout():
 
 @auth.route("/sign-up",methods=['GET','POST'])
 def sign_up():
+    form = RegisterForm()
     if request.method == 'POST':
-        name = request.form.get('name')
-        email = request.form.get('email')
-        emailConfirm = request.form.get('emailConfirm')
-        password = request.form.get('password')        
-        flash('İsim alanı 4 karakterden az olamaz.', category='error')      
-    
-        
-    return render_template('sign-up.html')    
-           
+        if form.validate_on_submit():
+            name = request.form.get('name')
+            email = request.form.get('email')
+            emailConfirm = request.form.get('emailConfirm')
+            password = request.form.get('password')        
+            flash('Kayıt İşlemi Başarılı', category='success')      
+        else:
+            flash('Kontrol Edip Tekrar Deneyin', category='success')
+            return render_template('sign-up.html',form = form)    
+    return render_template('sign-up.html',form = form)           
    
     #flash('basarili', category='success') 
     
