@@ -1,3 +1,29 @@
-{% extends 'base.html' %} 
-{% block title %}Login{% endblock title %}Changed 
-{%block content %} Login Page {% endblock %}
+{% extends 'base.html' %}
+{% block title %}Login{% endblock title %}Changed
+
+{% block RegisterStyle %}
+<link rel="stylesheet" href="{{ url_for('static',filename='LoginStyle.css') }}" />
+{% endblock %}
+{% block content %}
+<div class='signUp'>
+    <form>
+
+        <div class='input-control'>
+            <label for='emailaddress'></label>
+            <input type='email' placeholder="Enter E-Mail" />
+        </div>
+
+        <div class='input-control'>
+            <label for='password'></label>
+            <input type='password' placeholder="Enter Password" />
+        </div>
+
+        <button type="button">LOGIN</button>
+
+
+    </form>
+</div>
+
+
+
+{% endblock %}
