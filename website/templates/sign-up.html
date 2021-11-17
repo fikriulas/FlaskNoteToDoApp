@@ -5,23 +5,23 @@
 {% endblock %}
 {%block content %}
 <div class='signUp'>
-    <form>
+    <form action="/sign-up" method="post">
         <div class='input-control'>
-            <input type='name' placeholder="Name" />
+            <input type='name' id='name' name='name' placeholder="Name" />
         </div>
         <div class='input-control'>
             <label for='email'></label>
-            <input type='email' placeholder="Enter E-Mail" />
+            <input type='email' id='email' name='email' placeholder="Enter E-Mail" />
         </div>
         <div class='input-control'>
             <label for='emailConfirm'></label>
-            <input type='emailConfirm' placeholder="E-Mail Confirm" />
+            <input type='emailConfirm' id='emailConfirm' name='emailConfirm' placeholder="E-Mail Confirm" />
         </div>
         <div class='input-control'>
             <label for='password'></label>
-            <input type='password' placeholder="Enter Password" />
+            <input type='password' id='password' name='password' placeholder="Enter Password" />
         </div>
-        <button type="button">LOGIN</button>
+        <button type="submit">LOGIN</button>
     </form>
 </div>
 
