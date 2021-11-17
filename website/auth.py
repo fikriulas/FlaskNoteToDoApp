@@ -12,12 +12,25 @@ class RegisterForm(FlaskForm):
     email = StringField('email', validators=[DataRequired('This Field Is Required'),Email('This field requires a valid email address'),Length(min=3,max=40)])
     emailConfirm = StringField('emailConfirm', validators=[DataRequired('This Field Is Required'),EqualTo('email',message="E-Mail Field does not match.")])
     password = StringField('password', validators=[DataRequired('This Field Is Required'),Length(min=7,max=15)],widget=PasswordInput(hide_value=False))
-
-
+class LoginForm(FlaskForm):
+    email = StringField('email', validators=[DataRequired('This Field Is Required'),Email('This field requires a valid email address'),Length(min=3,max=40)])
+    password = StringField('password', validators=[DataRequired('This Field Is Required'),Length(min=7,max=15)],widget=PasswordInput(hide_value=False))
+    
 @auth.route('/login',methods=['GET','POST'])
 def login():
-    data = request.form
-    return render_template('login.html')
+    form = LoginForm()
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            email = request.form.get('email')
+            password = request.form.get('password')
+            flash('Giriş İşlemi Başarılı',category='success')
+        else:
+            flash('Kontrol Edip Tekrar Deneyin',category='error')
+            return render_template('login.html',form = form)      
+        
+        
+        
+    return render_template('login.html',form = form)
 
 @auth.route("/logout")
 def logout():
@@ -34,7 +47,7 @@ def sign_up():
             password = request.form.get('password')        
             flash('Kayıt İşlemi Başarılı', category='success')      
         else:
-            flash('Kontrol Edip Tekrar Deneyin', category='success')
+            flash('Kontrol Edip Tekrar Deneyin', category='error')
             return render_template('sign-up.html',form = form)    
     return render_template('sign-up.html',form = form)           
    

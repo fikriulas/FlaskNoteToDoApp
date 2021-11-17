@@ -6,19 +6,29 @@
 {% endblock %}
 {% block content %}
 <div class='signUp'>
-    <form>
+    <form action="/login" method="post">
 
         <div class='input-control'>
             <label for='emailaddress'></label>
-            <input type='email' placeholder="Enter E-Mail" />
+            {{form.email(placeholder="Enter E-Mail")}}
+            {% for error in form.email.errors %}
+
+            <small style="color:red">{{error}} <br></small>
+
+            {% endfor %}
         </div>
 
         <div class='input-control'>
             <label for='password'></label>
-            <input type='password' placeholder="Enter Password" />
+            {{form.password(placeholder="Enter Password")}}
+            {% for error in form.password.errors %}
+            <span style="color:red;">
+                <small>{{error}} <br></small>
+            </span>
+            {% endfor %}
         </div>
 
-        <button type="button">LOGIN</button>
+        <button type="submit">LOGIN</button>
 
 
     </form>
