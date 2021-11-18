@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}" />
   <link rel="stylesheet" href="{{ url_for('static',filename='toastr.css') }}" />
   {% block RegisterStyle %}{% endblock %}
+  {% block NoteStyle %}{% endblock %}
 
 </head>
 
@@ -26,7 +27,7 @@
         <div class="collapse navbar-collapse" id="nvbCollapse">
           <ul class="navbar-nav">
             <li class="nav-item pl-1">
-              <a class="nav-link" href="#"><i class="fa fa-home fa-fw mr-1"></i>Note</a>
+              <a class="nav-link" href="/note"><i class="fa fa-home fa-fw mr-1"></i>Note</a>
             </li>
             <li class="nav-item active pl-1">
               <a class="nav-link" href="#"><i class="fa fa-th-list fa-fw mr-1"></i>To Do</a>
